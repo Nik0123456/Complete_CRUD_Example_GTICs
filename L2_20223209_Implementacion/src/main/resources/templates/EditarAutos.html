@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Auto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        footer {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 40px;
+        }
+        header img {
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container mt-5">
+
+<h2 class="mb-4">Editar Auto</h2>
+
+<form th:action="@{/autos/guardar}" method="post" class="row g-3">
+
+    <!-- Se incluye este input oculto para almacenar la id del registro que esta siendo editado -->
+    <input th:value="${auto.getIdAuto()}" name="idAuto" type="hidden" required />
+
+    <div class="form-group">
+        <label for="modelo" class="form-label">Modelo</label>
+        <input th:value="${auto.getModelo()}" type="text" class="form-control" id="modelo" name="modelo" required>
+    </div>
+
+    <div class="form-group">
+        <label for="color" class="form-label">Color</label>
+        <input th:value="${auto.getColor()}" type="text" class="form-control" id="color" name="color">
+    </div>
+
+    <div class="form-group">
+        <label for="kilometraje" class="form-label">Kilometraje</label>
+        <input th:value="${auto.getKilometraje()}" type="text" class="form-control" id="kilometraje" name="kilometraje" required>
+    </div>
+
+    <div class="form-group">
+        <label for="costo_por_dia" class="form-label">Costo por dia</label>
+        <input th:value="${auto.getCostoPorDia()}" type="number" step="any" class="form-control" id="costo_por_dia" name="costoPorDia" required>
+    </div>
+
+    <div class="form-group">
+        <label for="sede" class="form-label">Sede</label>
+        <select class="form-control" id="sede" name="sede" required>
+            <option th:each="sede : ${listaSedes}" th:value="${sede.getIdSede()}" th:text="${sede.getDireccion()}"
+                    th:selected="${sede.getIdSede() == auto.getSede().getIdSede()}"></option>
+        </select>
+    </div>
+
+    <div class="col-12">
+        <a th:href="@{/autos/listar}" class="btn btn-danger">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

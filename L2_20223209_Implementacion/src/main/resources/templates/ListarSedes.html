@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Sedes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        footer {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 40px;
+        }
+        header img {
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body class="container mt-5">
+
+<h2 class="mt-4">Lista de sedes</h2>
+
+<div class="mb-3">
+    <a href="/sedes/crear" class="btn btn-primary">Nueva sede</a>
+</div>
+
+<table class="table table-bordered">
+    <thead class="table-light">
+    <tr>
+        <th>Id Sede</th>
+        <th>Distrito</th>
+        <th>Direccion</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sede : ${listaSedes}">
+        <td th:text="${sede.getIdSede()}">IdSede</td>
+        <td th:text="${sede.getDistrito()}">Distrito</td>
+        <td th:text="${sede.getDireccion()}">Direccion</td>
+        <td>
+            <a th:href="@{/sedes/editar(id=${sede.getIdSede()})}"
+               class="btn btn-sm btn-primary">Editar</a>
+        </td>
+        <td>
+            <a th:href="@{/sedes/eliminar(id=${sede.getIdSede()})}" class="btn btn-sm btn-danger"
+               onclick="return confirm('¿Seguro?')">Borrar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
