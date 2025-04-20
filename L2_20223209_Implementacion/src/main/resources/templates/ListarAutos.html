@@ -29,6 +29,10 @@
 <!-- Notificacion cuando se crea o actualiza un registro -->
 <div th:if="${mensaje != null}" th:text="${mensaje}" class="alert alert-success" role="alert"> </div>
 
+<form method="get" th:action="@{/autos/BuscarAuto}">
+  <input name="searchTerm" class="form-control mb-3" type="text" placeholder="Buscar"/>
+</form>
+
 <table class="table table-bordered">
   <thead class="table-light">
   <tr>

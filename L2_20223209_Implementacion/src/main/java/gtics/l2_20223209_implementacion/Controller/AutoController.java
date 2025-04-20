@@ -84,4 +84,18 @@ public class AutoController {
         return "redirect:/autos/listar";
     }
 
+    //Listar autos filtrando por modelo, color o direccion
+
+    @GetMapping("/autos/BuscarAuto")
+    public String buscarAuto(@RequestParam("searchTerm") String searchTerm, Model model) {
+
+        if(searchTerm == null || searchTerm.trim().isEmpty()){
+            return "redirect:/autos/listar";
+        }
+
+        List<Auto> listaAutos = autoRepository.buscarAutoMulticriterio(searchTerm.trim());
+        model.addAttribute("listaAutos", listaAutos);
+        return "ListarAutos";
+    }
+
 }
